@@ -1,11 +1,19 @@
+.restaurant-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  border: 1px solid red;
+}
+
 .restaurant-info-container {
   border: 2px solid black;
   width: 83.5%;
   height: 82vh;
   border-radius: 15px;
-  top: 4.1rem;
-  position: absolute;
-  left: 4rem;
+  /* top: 4.1rem;
+  left: 4rem; */
 }
 
 .restaurant-img-parent {
@@ -20,4 +28,67 @@
   border-radius: 10px;
   max-width: 100%;
   max-height: 100%;
+}
+
+.restaurant-content {
+  margin-top: 3.5rem;
+  height: 50%;
+}
+
+.restaurant-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.restaurant-title h2 {
+  font-size: 2.7rem;
+  text-transform: uppercase;
+  margin-left: 2.3rem;
+}
+
+.restaurant-title p {
+  text-transform: uppercase;
+  color: red;
+  margin-right: 4.5rem;
+  font-size: 1.5rem;
+}
+
+.restaurant-address {
+  margin-top: 3.5rem;
+  font-size: 1.5rem;
+  text-align: left;
+  margin-left: 2rem;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.restaurant-phone {
+  text-align: left;
+  font-size: 1.5rem;
+  margin-top: 1.6rem;
+  margin-left: 2rem;
+}
+
+.restaurant-distance {
+  text-align: left;
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+
+.restaurant-reserve {
+  margin-top: 4.5rem;
+  width: 100%;
+  height: 8vh;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: white;
+  background-color: #83dd6d;
 }
