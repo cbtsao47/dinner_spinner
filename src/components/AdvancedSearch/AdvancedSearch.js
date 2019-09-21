@@ -18,7 +18,7 @@ export class AdvancedSearch extends Component {
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        {/* <form onSubmit={this.handleSubmit}>
           <label htmlFor="radius">
             Pick a radius
             <input
@@ -40,7 +40,7 @@ export class AdvancedSearch extends Component {
             />
           </label>
           <button type="submit">Confirm</button>
-        </form>
+        </form> */}
       </div>
     );
   }
