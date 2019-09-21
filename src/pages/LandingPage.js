@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Spinner from "../components/Spinner";
 import RestaurantInfo from "../components/RestaurantInfo";
-import Button from "../components/Button";
 import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
 export default class LandingPage extends Component {
   state = {
@@ -75,11 +74,10 @@ export default class LandingPage extends Component {
     return (
       <div>
         {/* TODO: find spinner library */}
-        <Spinner restaurants={restaurants} />
-        {/* TODO:  search by radius and number of restaurants*/}
-        <AdvancedSearch updateSearchSetting={this.updateSearchSetting} />
-        {/* TODO: */}
-        <Button />
+        <Spinner
+          restaurants={restaurants}
+          updateSearchSetting={this.updateSearchSetting}
+        />
         {/* TODO: */}
         <RestaurantInfo selected={selected} />
       </div>
