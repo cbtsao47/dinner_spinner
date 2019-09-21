@@ -11,17 +11,17 @@ export default class LandingPage extends Component {
     // TODO: grab restaurant info from yelp
     // top 10
   }
-
   render() {
     const { restaurants } = this.state;
     return (
       <div>
         {/* TODO: find spinner library */}
         <Spinner restaurants={restaurants} />
-        {/* TODO:  search by radius */}
+        {/* TODO:  search by radius and number of restaurants*/}
         <AdvancedSearch />
         {/* TODO: */}
         <Button />
+        {/* TODO: */}
         <RestaurantInfo />
       </div>
     );
