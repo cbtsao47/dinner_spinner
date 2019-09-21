@@ -57,7 +57,7 @@ export default class LandingPage extends Component {
         this.setState({
           ...this.state,
           restaurants: data.businesses,
-          selected: JSON.stringify(data.businesses[0])
+          selected: data.businesses[0]
         });
       })
       .catch(err => {
