@@ -2,6 +2,11 @@ import React from "react";
 
 export default function CarouselRoulette() {
     const array = ["1", "2", "3", "4"]
+    const spinning = false;
+
+    const spin = () => {
+        
+    }
 
     return (
         <div>
@@ -12,6 +17,7 @@ export default function CarouselRoulette() {
                     </div>
                 )
             })}
+            <button onClick={() => !spinning && spin()}>SPIN</button>
         </div>
     )
 }
