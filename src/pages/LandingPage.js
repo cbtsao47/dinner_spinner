@@ -3,7 +3,6 @@ import Spinner from "../components/Spinner";
 import RestaurantInfo from "../components/RestaurantInfo";
 import Button from "../components/Button";
 import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
-import axios from "axios";
 export default class LandingPage extends Component {
   state = {
     restaurants: [],
@@ -30,27 +29,47 @@ export default class LandingPage extends Component {
       .slice(0, limit);
   };
 
-  componentDidMount() {
-    this.getRestaurants()
-      .then(restaurants => {
-        return this.filter(restaurants, this.state.searchSetting);
+  async componentDidMount() {
+    /*GET USER LOCATION*/
+    // getting location details
+    let latitude;
+    let longitude;
+    await this.getPosition()
+      .then(position => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
       })
-      .then(filteredList => {
-        this.setState({ restaurants: filteredList });
+      .catch(err => {
+        console.log(err.message);
+      });
+
+    const { radius, limit } = this.state.searchSetting;
+    const DINNER_SPINNER_BE_BASE_URL =
+      "https://dinner-spinner.herokuapp.com/api/restaurants/";
+
+    let DINNER_SPINNER_BE_URL = `${DINNER_SPINNER_BE_BASE_URL}${latitude}/${longitude}/${radius}/${limit}`;
+
+    fetch(DINNER_SPINNER_BE_URL)
+      .then(res => {
+        return res.json();
       })
-      .catch(err => console.log(err));
+      .then(data => {
+        this.setState({ ...this.state, restaurants: data.businesses });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
-  /**
-   * Get restaurants info from yelp
-   * @param none
-   * @return array of objects, restaurants
-   */
-  getRestaurants = async () => {
-    const { data: restaurants } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}`
-    );
-    return restaurants;
+
+  /*
+   * Gets the current position of the sign-in user
+   **/
+  getPosition = () => {
+    return new Promise(function(resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
   };
+
   render() {
     const { restaurants, selected } = this.state;
     return (
