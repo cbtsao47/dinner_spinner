@@ -8,18 +8,24 @@ export class AdvancedSearch extends Component {
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.updateSearchSetting(this.state);
+  };
+
   render() {
     const { radius, limit } = this.state;
+
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label htmlFor="radius">
             Pick a radius
             <input
               type="text"
               id="radius"
               name="radius"
-              onChange={handleChange}
+              onChange={this.handleChange}
               value={radius}
             />
           </label>
@@ -29,11 +35,11 @@ export class AdvancedSearch extends Component {
               type="text"
               id="limit"
               name="limit"
-              onChange={handleChange}
+              onChange={this.handleChange}
               value={limit}
             />
           </label>
-          <button>Confirm</button>
+          <button type="submit">Confirm</button>
         </form>
       </div>
     );
