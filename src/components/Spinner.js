@@ -3,14 +3,13 @@ import React, { useEffect } from "react";
 export default function VanillaWheel() {
   // To get good sizing for the roulette wheel
   const size = document.body.clientWidth * 0.6;
-  console.log(document.body.clientWidth);
 
   // If spinning === true, then the spinner will not spin again. Keeps the user from continuously spinning
   let spinning = false;
 
   // options will contain the restaurant names
   const options = [
-    "McDonald's", "Wendy's", "Starbucks", "The greatest thing ever"
+    "McDonald's", "Wendy's", "Starbucks", "The greatest thing ever", "w", "w", "w", "Pal's Pizza Emporioum"
   ];
 
   let startAngle = 0;
@@ -56,8 +55,8 @@ export default function VanillaWheel() {
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
       const outsideRadius = size / 2.5;
-      const textRadius = 160;
-      const insideRadius = 50;
+      const textRadius = outsideRadius/1.7;
+      const insideRadius = 40;
 
       ctx = canvas.getContext("2d");
       canvas.height = canvas.width;
@@ -75,8 +74,8 @@ export default function VanillaWheel() {
 
         // Creating the borders and colors for the wheel
         ctx.beginPath();
-        ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
-        ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
+        ctx.arc(size/2, size/2, outsideRadius, angle, angle + arc, false);
+        ctx.arc(size/2, size/2, insideRadius, angle + arc, angle, true);
         ctx.stroke();
         ctx.fill();
 
@@ -88,13 +87,14 @@ export default function VanillaWheel() {
         ctx.shadowColor = "#AAAAAA";
         ctx.fillStyle = "black";
         const text = options[i];
+        console.log(text.length)
         ctx.translate(
-          250 + Math.cos(angle + arc / 2) * textRadius,
-          250 + Math.sin(angle + arc / 2) * textRadius
+          (size/2) + Math.cos(angle + arc / 2) * textRadius,
+          (size/2) + Math.sin(angle + arc / 2) * textRadius
         );
         ctx.rotate(angle + arc / 2 + Math.PI / 2);
         ctx.rotate(-Math.PI / 2);
-        ctx.translate(-text.length*3, 0);
+        // ctx.translate(-text.length*3, 0);
         ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
         ctx.restore();
       }
