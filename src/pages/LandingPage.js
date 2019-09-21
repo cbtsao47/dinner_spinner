@@ -5,24 +5,48 @@ import Button from "../components/Button";
 import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
 export default class LandingPage extends Component {
   state = {
-    restaurants: []
+    restaurants: [],
+    searchSetting: { radius: 5, limit: 8 },
+    selected: {}
   };
-  componentDidMount() {
-    // TODO: grab restaurant info from yelp
-    // top 10
-  }
+  /**
+   * Update search setting
+   * @param searchSetting, object containing radius and limit
+   * @returns does not return anything
+   */
+  updateSearchSetting = searchSetting => {
+    this.setState({ searchSetting });
+  };
+  /**
+   * Filter through a list of restaurants based of search setting
+   * @param restaurants, array of objects
+   * @returns restaurants, array of objects
+   */
+  filter = (restaurants, searchSetting) => {
+    const { radius, limit } = searchSetting;
+    return restaurants
+      .filter(restaurant => restaurant.radius <= radius)
+      .slice(0, limit);
+  };
 
+  componentDidMount() {
+    // TODO: grab top restaurant info from yelp
+    // const {restaurants,searchSetting}=this.state
+    // this.filter(restaurants,searchSetting)
+    //
+  }
   render() {
-    const { restaurants } = this.state;
+    const { restaurants, selected } = this.state;
     return (
       <div>
         {/* TODO: find spinner library */}
         <Spinner restaurants={restaurants} />
-        {/* TODO:  search by radius */}
-        <AdvancedSearch />
+        {/* TODO:  search by radius and number of restaurants*/}
+        <AdvancedSearch updateSearchSetting={this.updateSearchSetting} />
         {/* TODO: */}
         <Button />
-        <RestaurantInfo />
+        {/* TODO: */}
+        <RestaurantInfo selected={selected} />
       </div>
     );
   }

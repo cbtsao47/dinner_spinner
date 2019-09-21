@@ -4,7 +4,7 @@ export class Button extends Component {
   render() {
     return (
       <div>
-        <button>button</button>
+        <button>SPIN</button>
       </div>
     );
   }
