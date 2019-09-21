@@ -22,7 +22,7 @@ export class AdvancedSearch extends Component {
           <label htmlFor="radius">
             Pick a radius
             <input
-              type="text"
+              type="number"
               id="radius"
               name="radius"
               onChange={this.handleChange}
@@ -32,7 +32,7 @@ export class AdvancedSearch extends Component {
           <label htmlFor="limit">
             How many restaurants?
             <input
-              type="text"
+              type="number"
               id="limit"
               name="limit"
               onChange={this.handleChange}
