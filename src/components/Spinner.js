@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import arrow from "../img/up-arrow.svg"
 
 export default function VanillaWheel() {
   // To get good sizing for the roulette wheel
@@ -9,14 +10,21 @@ export default function VanillaWheel() {
 
   // options will contain the restaurant names
   const options = [
-    "McDonald's", "Wendy's", "Starbucks", "The greatest thing ever", "w", "w", "w", "Pal's Pizza Emporioum"
+    "McDonald's",
+    "Wendy's",
+    "Starbucks",
+    "The greatest thing ever",
+    "w",
+    "w",
+    "w",
+    "Pal's Pizza Emporioum"
   ];
 
   let startAngle = 0;
   let arc = Math.PI / (options.length / 2);
   let spinTimeout = null;
 
-//   let spinArcStart = 10; // This variable was included from the Codepen, but is never used
+  //   let spinArcStart = 10; // This variable was included from the Codepen, but is never used
   let spinTime = 0;
   let spinTimeTotal = 0;
 
@@ -55,8 +63,8 @@ export default function VanillaWheel() {
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
       const outsideRadius = size / 2.5;
-      const textRadius = outsideRadius/1.7;
       const insideRadius = 40;
+      const textRadius = insideRadius * 1.5;
 
       ctx = canvas.getContext("2d");
       canvas.height = canvas.width;
@@ -74,8 +82,8 @@ export default function VanillaWheel() {
 
         // Creating the borders and colors for the wheel
         ctx.beginPath();
-        ctx.arc(size/2, size/2, outsideRadius, angle, angle + arc, false);
-        ctx.arc(size/2, size/2, insideRadius, angle + arc, angle, true);
+        ctx.arc(size / 2, size / 2, outsideRadius, angle, angle + arc, false);
+        ctx.arc(size / 2, size / 2, insideRadius, angle + arc, angle, true);
         ctx.stroke();
         ctx.fill();
 
@@ -87,30 +95,30 @@ export default function VanillaWheel() {
         ctx.shadowColor = "#AAAAAA";
         ctx.fillStyle = "black";
         const text = options[i];
-        console.log(text.length)
+        console.log(text.length);
         ctx.translate(
-          (size/2) + Math.cos(angle + arc / 2) * textRadius,
-          (size/2) + Math.sin(angle + arc / 2) * textRadius
+          size / 2 + Math.cos(angle + arc / 2),
+          size / 2 + Math.sin(angle + arc / 2)
         );
         ctx.rotate(angle + arc / 2 + Math.PI / 2);
         ctx.rotate(-Math.PI / 2);
         // ctx.translate(-text.length*3, 0);
-        ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+        ctx.fillText(text, textRadius, 0);
         ctx.restore();
       }
 
       //Arrow
-      ctx.fillStyle = "black";
-      ctx.beginPath();
-      ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
-      ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
-      ctx.lineTo(250 + 4, 250 - (outsideRadius - 5));
-      ctx.lineTo(250 + 9, 250 - (outsideRadius - 5));
-      ctx.lineTo(250 + 0, 250 - (outsideRadius - 13));
-      ctx.lineTo(250 - 9, 250 - (outsideRadius - 5));
-      ctx.lineTo(250 - 4, 250 - (outsideRadius - 5));
-      ctx.lineTo(250 - 4, 250 - (outsideRadius + 5));
-      ctx.fill();
+      // ctx.fillStyle = "black";
+      // ctx.beginPath();
+      // ctx.moveTo(size / 2 - 4, size / 2 - (outsideRadius + 10));
+      // ctx.lineTo(size / 2 + 4, size / 2 - (outsideRadius + 10));
+      // ctx.lineTo(size / 2 + 4, size / 2 - (outsideRadius - 10));
+      // ctx.lineTo(size / 2 + 9, size / 2 - (outsideRadius - 10));
+      // ctx.lineTo(size / 2 + 0, size / 2 - (outsideRadius - 26));
+      // ctx.lineTo(size / 2 - 9, size / 2 - (outsideRadius - 10));
+      // ctx.lineTo(size / 2 - 4, size / 2 - (outsideRadius - 10));
+      // ctx.lineTo(size / 2 - 4, size / 2 - (outsideRadius + 10));
+      // ctx.fill();
     }
   }
 
@@ -162,8 +170,21 @@ export default function VanillaWheel() {
 
   return (
     <div>
+      <img src={arrow} alt="arrow"/>
       <canvas id="canvas" width={`${size}`} height={`${size}`} />
-      <button id="spin" onClick={() => !spinning && spin()}>SPIN</button>
+      <button id="spin" onClick={() => !spinning && spin()}>
+        SPIN
+      </button>
+      <div>
+        Icons made by{" "}
+        <a href="https://www.flaticon.com/authors/hanan" title="Hanan">
+          Hanan
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
     </div>
   );
 }
