@@ -1,13 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 
-export class RestaurantInfo extends Component {
-  render() {
-    return (
-      <div>
-        <h1>RestaurantInfo</h1>
-      </div>
-    );
-  }
-}
+const RestaurantInfo = ({ selected }) => {
+  return (
+    <div>
+      <img src={selected.image_url} alt={selected.name} />
+      <p>{selected.is_closed}</p>
+      <p>{selected.rating}</p>
+      <address>
+        <p>{selected.location.display_address}</p>
+      </address>
+      <a href={`tel:${selected.phone}`}>{selected.display_phone}</a>
+    </div>
+  );
+};
 
 export default RestaurantInfo;

@@ -3,6 +3,7 @@ import Spinner from "../components/Spinner";
 import RestaurantInfo from "../components/RestaurantInfo";
 import Button from "../components/Button";
 import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
+import axios from "axios";
 export default class LandingPage extends Component {
   state = {
     restaurants: [],
@@ -30,11 +31,26 @@ export default class LandingPage extends Component {
   };
 
   componentDidMount() {
-    // TODO: grab top restaurant info from yelp
-    // const {restaurants,searchSetting}=this.state
-    // this.filter(restaurants,searchSetting)
-    //
+    this.getRestaurants()
+      .then(restaurants => {
+        return this.filter(restaurants, this.state.searchSetting);
+      })
+      .then(filteredList => {
+        this.setState({ restaurants: filteredList });
+      })
+      .catch(err => console.log(err));
   }
+  /**
+   * Get restaurants info from yelp
+   * @param none
+   * @return array of objects, restaurants
+   */
+  getRestaurants = async () => {
+    const { data: restaurants } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}`
+    );
+    return restaurants;
+  };
   render() {
     const { restaurants, selected } = this.state;
     return (
