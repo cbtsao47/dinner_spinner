@@ -6,7 +6,7 @@ export class AdvancedSearch extends Component {
     limit: 8
   };
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: Number(e.target.value) });
   };
   handleSubmit = e => {
     e.preventDefault();

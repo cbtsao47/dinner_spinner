@@ -22,8 +22,8 @@ export default class LandingPage extends Component {
    * @param restaurants, array of objects
    * @returns restaurants, array of objects
    */
-  filter = restaurants => {
-    const { radius, limit } = this.state.searchSetting;
+  filter = (restaurants, searchSetting) => {
+    const { radius, limit } = searchSetting;
     return restaurants
       .filter(restaurant => restaurant.radius <= radius)
       .slice(0, limit);
@@ -31,7 +31,8 @@ export default class LandingPage extends Component {
 
   componentDidMount() {
     // TODO: grab top restaurant info from yelp
-    // this.filter(restaurants)
+    // const {restaurants,searchSetting}=this.state
+    // this.filter(restaurants,searchSetting)
     //
   }
   render() {
