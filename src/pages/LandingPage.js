@@ -59,7 +59,6 @@ export default class LandingPage extends Component {
         return res.json();
       })
       .then(data => {
-        console.log("DATA IS ... " + JSON.stringify(data.businesses));
         this.setState({ ...this.state, restaurants: data.businesses });
       })
       .catch(err => {
@@ -68,6 +67,7 @@ export default class LandingPage extends Component {
     // const {restaurants,searchSetting}=this.state
     // this.filter(restaurants,searchSetting)
     //
+    console.log(this.state.restaurants);
   }
 
   /*
