@@ -29,12 +29,56 @@ export default class LandingPage extends Component {
       .slice(0, limit);
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    /*GET USER LOCATION*/
+    // getting location details
+    let latitude;
+    let longitude;
+    await this.getPosition()
+      .then(position => {
+        console.log(position.coords.latitude, position.coords.longitude);
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+    console.log(
+      `LANDING PAGE :: CDM :: LOCATION IS  IS :: ${latitude}, ${longitude}`
+    );
+
+    const { radius, limit } = this.state.searchSetting;
     // TODO: grab top restaurant info from yelp
+    const DINNER_SPINNER_BE_BASE_URL =
+      "https://dinner-spinner.herokuapp.com/api/restaurants/";
+
+    let DINNER_SPINNER_BE_URL = `${DINNER_SPINNER_BE_BASE_URL}${latitude}/${longitude}/${radius}/${limit}`;
+
+    fetch(DINNER_SPINNER_BE_URL)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        this.setState({ ...this.state, restaurants: data.businesses });
+      })
+      .catch(err => {
+        console.log(err);
+      });
     // const {restaurants,searchSetting}=this.state
     // this.filter(restaurants,searchSetting)
     //
+    console.log(this.state.restaurants);
   }
+
+  /*
+   * Gets the current position of the sign-in user
+   **/
+  getPosition = () => {
+    return new Promise(function(resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  };
+
   render() {
     const { restaurants, selected } = this.state;
     return (
