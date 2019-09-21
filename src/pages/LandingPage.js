@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import Spinner from "../components/Spinner";
+import SpinnerCard from "../components/SpinnerCard";
 import RestaurantInfo from "../components/RestaurantInfo";
-import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
 export default class LandingPage extends Component {
   state = {
     restaurants: [],
     searchSetting: { radius: 5, limit: 8 },
-    selected: {}
+    selected: {},
+    spinning: false
   };
   /**
    * Update search setting
@@ -68,15 +68,21 @@ export default class LandingPage extends Component {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
   };
-
+  handleClick = e => {
+    e.preventDefault();
+    console.log("hi");
+    this.setState({ spinning: true });
+  };
   render() {
-    const { restaurants, selected } = this.state;
+    const { restaurants, selected, spinning } = this.state;
     return (
       <div>
         {/* TODO: find spinner library */}
-        <Spinner
-          restaurants={restaurants}
+        <SpinnerCard
+          restaurant={restaurants}
           updateSearchSetting={this.updateSearchSetting}
+          handleClick={this.handleClick}
+          spinning={spinning}
         />
         {/* TODO: */}
         <RestaurantInfo selected={selected} />
