@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Spinner from "../components/Spinner";
 import RestaurantInfo from "../components/RestaurantInfo";
-import Button from "../components/Button";
 import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
 export default class LandingPage extends Component {
   state = {
@@ -36,19 +35,14 @@ export default class LandingPage extends Component {
     let longitude;
     await this.getPosition()
       .then(position => {
-        console.log(position.coords.latitude, position.coords.longitude);
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
       })
       .catch(err => {
         console.log(err.message);
       });
-    console.log(
-      `LANDING PAGE :: CDM :: LOCATION IS  IS :: ${latitude}, ${longitude}`
-    );
 
     const { radius, limit } = this.state.searchSetting;
-    // TODO: grab top restaurant info from yelp
     const DINNER_SPINNER_BE_BASE_URL =
       "https://dinner-spinner.herokuapp.com/api/restaurants/";
 
@@ -69,10 +63,6 @@ export default class LandingPage extends Component {
       .catch(err => {
         console.log(err);
       });
-    // const {restaurants,searchSetting}=this.state
-    // this.filter(restaurants,searchSetting)
-    //
-    console.log(this.state.restaurants);
   }
 
   /*
@@ -89,11 +79,10 @@ export default class LandingPage extends Component {
     return (
       <div>
         {/* TODO: find spinner library */}
-        <Spinner restaurants={restaurants} />
-        {/* TODO:  search by radius and number of restaurants*/}
-        <AdvancedSearch updateSearchSetting={this.updateSearchSetting} />
-        {/* TODO: */}
-        <Button />
+        <Spinner
+          restaurants={restaurants}
+          updateSearchSetting={this.updateSearchSetting}
+        />
         {/* TODO: */}
         <RestaurantInfo selected={selected} />
       </div>

@@ -1,28 +1,17 @@
-import React, { Component } from "react";
-import "../styles/RestaurantInfo.css";
+import React from "react";
 
-export class RestaurantInfo extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    // console.log("==========================" + this.props.selected);
-    // const selectedItem = this.props.selected;
-    // // console.log("__________________" + JSON.stringify(selectedItem));
-    // const imageUrl = JSON.parse(selectedItem.image_url);
-    // console.log("IMAGE URL " + imageUrl);
-    return (
-      <>
-        <div className="restaurant-info-container">
-          <img
-            src={this.props.image_url}
-            alt="restaurant"
-            className="restaurant-image"
-          />
-        </div>
-      </>
-    );
-  }
-}
+const RestaurantInfo = ({ selected }) => {
+  return (
+    <div>
+      <img src={selected.image_url} alt={selected.name} />
+      <p>{selected.is_closed}</p>
+      <p>{selected.rating}</p>
+      <address>
+        <p>{selected.location && selected.location.display_address}</p>
+      </address>
+      <a href={`tel:${selected.phone}`}>{selected.display_phone}</a>
+    </div>
+  );
+};
 
 export default RestaurantInfo;
