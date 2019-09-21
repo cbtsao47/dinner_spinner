@@ -1,41 +1,23 @@
 import React, { useEffect } from "react";
 
 export default function VanillaWheel() {
-
   // To get good sizing for the roulette wheel
-  const size = document.body.clientWidth * .6;
-  console.log(document.body.clientWidth)
+  const size = document.body.clientWidth * 0.6;
+  console.log(document.body.clientWidth);
 
   // If spinning === true, then the spinner will not spin again. Keeps the user from continuously spinning
   let spinning = false;
 
   // options will contain the restaurant names
   const options = [
-    "$100",
-    "$10",
-    "$25",
-    "$250",
-    "$30",
-    "$1000",
-    "$1",
-    "$200",
-    "$45",
-    "$500",
-    "$5",
-    "$20",
-    "Lose",
-    "$1000000",
-    "Lose",
-    "$350",
-    "$5",
-    "$99"
+    "McDonald's", "Wendy's", "Starbucks", "The greatest thing ever"
   ];
 
   let startAngle = 0;
   let arc = Math.PI / (options.length / 2);
   let spinTimeout = null;
 
-  let spinArcStart = 10;
+//   let spinArcStart = 10; // This variable was included from the Codepen, but is never used
   let spinTime = 0;
   let spinTimeTotal = 0;
 
@@ -73,7 +55,7 @@ export default function VanillaWheel() {
   function drawRouletteWheel() {
     const canvas = document.getElementById("canvas");
     if (canvas.getContext) {
-      const outsideRadius = size/2.5;
+      const outsideRadius = size / 2.5;
       const textRadius = 160;
       const insideRadius = 50;
 
@@ -91,26 +73,28 @@ export default function VanillaWheel() {
         //ctx.fillStyle = colors[i];
         ctx.fillStyle = getColor(i, options.length);
 
+        // Creating the borders and colors for the wheel
         ctx.beginPath();
         ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
         ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
         ctx.stroke();
         ctx.fill();
 
+        // Creating the text in the wheel
         ctx.save();
         ctx.shadowOffsetX = -1;
         ctx.shadowOffsetY = -1;
         ctx.shadowBlur = 0;
         ctx.shadowColor = "#AAAAAA";
         ctx.fillStyle = "black";
+        const text = options[i];
         ctx.translate(
           250 + Math.cos(angle + arc / 2) * textRadius,
           250 + Math.sin(angle + arc / 2) * textRadius
         );
         ctx.rotate(angle + arc / 2 + Math.PI / 2);
-        ctx.rotate(-Math.PI/2);
-        ctx.translate(-15, 0)
-        const text = options[i];
+        ctx.rotate(-Math.PI / 2);
+        ctx.translate(-text.length*3, 0);
         ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
         ctx.restore();
       }
@@ -173,18 +157,13 @@ export default function VanillaWheel() {
   }
 
   useEffect(() => {
-    document.getElementById("spin").addEventListener("click", () => {
-        if (!spinning) {
-            spin();
-        }
-    });
     drawRouletteWheel();
   }, []);
 
   return (
     <div>
-        <button id="spin">SPIN</button>
       <canvas id="canvas" width={`${size}`} height={`${size}`} />
+      <button id="spin" onClick={() => !spinning && spin()}>SPIN</button>
     </div>
   );
 }
