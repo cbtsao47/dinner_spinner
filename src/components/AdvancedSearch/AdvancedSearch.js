@@ -10,9 +10,9 @@ export class AdvancedSearch extends Component {
     return (
       <form>
         <label htmlFor="radius">
-          Pick a radius
+          Radius in miles
           <input
-          title="How many miles are you willing to travel?"
+            title="How many miles are you willing to travel?"
             type="number"
             id="radius"
             name="radius"
@@ -21,9 +21,9 @@ export class AdvancedSearch extends Component {
           />
         </label>
         <label htmlFor="limit">
-          How many restaurants?
+          Restaurant amount
           <input
-          title="How many restaurants would you like to pick from?"
+            title="How many restaurants would you like to pick from?"
             type="number"
             id="limit"
             name="limit"

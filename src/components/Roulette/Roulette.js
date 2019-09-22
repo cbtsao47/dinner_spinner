@@ -97,6 +97,8 @@ export default function Roulette({
       </button>
     </>
   ) : (
-    <MDSpinner size={160} />
+    <div className="loader">
+      <MDSpinner size={160} />
+    </div>
   );
 }

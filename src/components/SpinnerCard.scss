@@ -2,42 +2,42 @@
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  margin: 0 auto;
   border: 3px solid black;
   border-radius: 15px;
   overflow: hidden;
-  height: 80vh;
+  height: 50rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 35rem;
+  margin-right: 4rem;
 
   .spinner-title {
     font-size: 2rem;
     text-transform: uppercase;
     padding-top: 2rem;
     font-size: 3rem;
-    // text-align: left;
   }
 
   form {
     display: flex;
     justify-content: space-evenly;
-    padding: 0 5%;
+    padding: 0 1rem;
 
     label {
       width: 40%;
       text-align: left;
       font-size: 1.5rem;
       font-weight: bold;
-    }
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      input {
+        margin-top: 10px;
+        border: none;
+        border-bottom: 2px solid lightgray;
 
-    input {
-      margin-top: 10px;
-      border: none;
-      border-bottom: 2px solid lightgray;
-      font-size: 1.5rem;
-
-      &:focus {
-        border-bottom: 2px solid black;
+        &:focus {
+          border-bottom: 2px solid black;
+        }
       }
     }
   }
@@ -45,7 +45,7 @@
   .grandparent {
     height: 60%;
     padding: 5% 0;
-    width: 500px;
+    width: 100%;
     margin: 0 auto;
 
     #parent {

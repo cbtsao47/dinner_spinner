@@ -13,3 +13,9 @@ $item: 1 / $item-count;
   letter-spacing: 5px;
   cursor: pointer;
 }
+.loader {
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
