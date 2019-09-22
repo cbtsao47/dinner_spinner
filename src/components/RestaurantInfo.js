@@ -15,7 +15,7 @@ const RestaurantInfo = ({ selected }) => {
         </div>
         <div className="restaurant-content">
           <div className="restaurant-title">
-            <h2>My pizza</h2>
+            <h2>{selected.name}</h2>
             <div>
               {selected.is_closed && <p>closed now</p>}
               {!selected.is_closed && <p>open now</p>}

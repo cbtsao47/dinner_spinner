@@ -23,6 +23,10 @@ export default function Roulette({
   let children;
 
   const spinStart = () => {
+    // If we've spun before, this resets the "winner" styling
+    const winner = document.getElementById("big-n-bold");
+    winner.style.border = null;
+
     // Setting init variables
     spinCount = 0;
     handleClick(true);
@@ -67,18 +71,17 @@ export default function Roulette({
 
   return data.length ? (
     <>
-      <div
-        className="grandparent"
-        style={{ width: "500px", margin: "0 auto", background: "red" }}
-      >
+      <div className="grandparent">
         <div id="parent">
           {data.slice(0, 3).map((thing, i) => {
+            // The middle container should look slightly larger than the others
             if (i === 1) {
               return (
-                <div className="child" key={i}>
+                <div className="child big-n-bold" key={i}>
                   <p id="big-n-bold">{thing}</p>
                 </div>
               );
+              // Normal Container style
             } else {
               return (
                 <div className="child" key={i}>
