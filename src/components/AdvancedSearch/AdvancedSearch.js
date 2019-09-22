@@ -12,6 +12,7 @@ export class AdvancedSearch extends Component {
         <label htmlFor="radius">
           Pick a radius
           <input
+          title="How many miles are you willing to travel?"
             type="number"
             id="radius"
             name="radius"
@@ -22,6 +23,7 @@ export class AdvancedSearch extends Component {
         <label htmlFor="limit">
           How many restaurants?
           <input
+          title="How many restaurants would you like to pick from?"
             type="number"
             id="limit"
             name="limit"
