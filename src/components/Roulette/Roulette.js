@@ -1,6 +1,6 @@
 import React from "react";
 import "./Roulette.scss";
-
+import MDSpinner from "react-md-spinner";
 export default function Roulette({ spinning, handleClick, restaurants }) {
   const data = restaurants.map(restaurant => restaurant.name);
 
@@ -59,7 +59,7 @@ export default function Roulette({ spinning, handleClick, restaurants }) {
     handleClick(false);
   };
 
-  return (
+  return data.length ? (
     <>
       <div
         className="grandparent"
@@ -85,5 +85,7 @@ export default function Roulette({ spinning, handleClick, restaurants }) {
       </div>
       <button onClick={() => !spinning && spinStart()}>SPIN</button>
     </>
+  ) : (
+    <MDSpinner size={160} />
   );
 }
