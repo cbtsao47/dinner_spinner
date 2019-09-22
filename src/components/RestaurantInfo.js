@@ -2,8 +2,7 @@ import React from "react";
 import "../styles/RestaurantInfo.css";
 
 const RestaurantInfo = ({ selected }) => {
-  // const selectedItem = JSON.parse(selected);
-  console.dir(selected.image_url);
+  console.log(selected);
   return (
     <div className="restaurant-container">
       <div className="restaurant-info-container">
