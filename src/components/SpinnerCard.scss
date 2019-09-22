@@ -4,6 +4,8 @@
   justify-content: space-between;
   margin: 0 auto;
   border: 3px solid black;
+  border-radius: 15px;
+  overflow: hidden;
   height: 80vh;
   width: 100%;
   max-width: 500px;
@@ -11,6 +13,9 @@
   .spinner-title {
     font-size: 2rem;
     text-transform: uppercase;
+    padding-top: 2rem;
+    font-size: 3rem;
+    // text-align: left;
   }
 
   form {
@@ -42,12 +47,6 @@
     padding: 5% 0;
     width: 500px;
     margin: 0 auto;
-    background-image: linear-gradient(red, yellow);
-    // background-image: linear-gradient(
-    //   rgba(131, 221, 109, 0),
-    //   rgba(131, 221, 109, 1),
-    //   rgba(131, 221, 109, 1) rgba(131, 221, 109, 0)
-    // );
 
     #parent {
       height: 100%;
@@ -61,6 +60,7 @@
         flex-flow: column;
         height: 30%;
         border: 3px solid black;
+        border-radius: 15px;
         p {
           margin: auto;
           text-align: center;
@@ -69,6 +69,8 @@
       .big-n-bold {
         margin: 0;
         height: 35%;
+        margin-left: 1rem;
+        margin-right: 1rem;
         font-weight: bold;
 
         p {
