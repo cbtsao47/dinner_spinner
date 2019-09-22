@@ -1,21 +1,13 @@
 import React, { Component } from "react";
 
 export class AdvancedSearch extends Component {
-  state = {
-    radius: 5,
-    limit: 8
-  };
-  handleChange = e => {
-    this.setState({ [e.target.name]: Number(e.target.value) });
-  };
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.updateSearchSetting(this.state);
-  };
-
   render() {
-    const { radius, limit } = this.state;
+    const {
+      searchSetting: { radius, limit },
+      handleChange
+    } = this.props;
 
+    console.log(this.props);
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -25,7 +17,7 @@ export class AdvancedSearch extends Component {
               type="number"
               id="radius"
               name="radius"
-              onChange={this.handleChange}
+              onChange={handleChange}
               value={radius}
             />
           </label>
@@ -35,7 +27,7 @@ export class AdvancedSearch extends Component {
               type="number"
               id="limit"
               name="limit"
-              onChange={this.handleChange}
+              onChange={handleChange}
               value={limit}
             />
           </label>

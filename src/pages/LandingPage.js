@@ -8,14 +8,15 @@ export default class LandingPage extends Component {
     selected: {},
     spinning: false
   };
-  /**
-   * Update search setting
-   * @param searchSetting, object containing radius and limit
-   * @returns does not return anything
-   */
-  updateSearchSetting = searchSetting => {
-    this.setState({ searchSetting });
+  handleChange = e => {
+    this.setState({
+      searchSetting: {
+        ...this.state.searchSetting,
+        [e.target.name]: Number(e.target.value)
+      }
+    });
   };
+
   /**
    * Filter through a list of restaurants based of search setting
    * @param restaurants, array of objects
@@ -47,7 +48,6 @@ export default class LandingPage extends Component {
     let latitude = localStorage.getItem("latitude");
 
     let DINNER_SPINNER_BE_URL = `${DINNER_SPINNER_BE_BASE_URL}${latitude}/${longitude}/${radius}/${limit}`;
-    console.log(DINNER_SPINNER_BE_URL);
     fetch(DINNER_SPINNER_BE_URL)
       .then(res => {
         return res.json();
@@ -69,20 +69,35 @@ export default class LandingPage extends Component {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
   };
-  handleClick = e => {
-    e.preventDefault();
-    const longitude = localStorage.getItem("longitude");
-    const latitude = localStorage.getItem("latitude");
+  handleClick = bool => {
+    console.log(bool);
+    const { radius, limit } = this.state.searchSetting;
+    const DINNER_SPINNER_BE_BASE_URL =
+      "https://dinner-spinner.herokuapp.com/api/restaurants/";
+
+    let longitude = localStorage.getItem("longitude");
+    let latitude = localStorage.getItem("latitude");
+    bool
+      ? fetch(
+          `${DINNER_SPINNER_BE_BASE_URL}${latitude}/${longitude}/${radius}/${limit}`
+        )
+          .then(res => res.json())
+          .then(data => {
+            this.setState({ spinning: bool, restaurants: data.businesses });
+          })
+          .catch(err => console.log(err))
+      : this.setState({ spinning: bool });
   };
   render() {
-    const { restaurants, selected, spinning } = this.state;
+    const { restaurants, selected, spinning, searchSetting } = this.state;
     return (
       <div>
         <SpinnerCard
-          restaurant={restaurants}
-          updateSearchSetting={this.updateSearchSetting}
+          restaurants={restaurants}
           handleClick={this.handleClick}
           spinning={spinning}
+          handleChange={this.handleChange}
+          searchSetting={searchSetting}
         />
         <RestaurantInfo selected={selected} />
       </div>
