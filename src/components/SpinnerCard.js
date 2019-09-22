@@ -1,26 +1,27 @@
 import React from "react";
-import Spinner from "./Spinner";
 import AdvancedSearch from "./AdvancedSearch/AdvancedSearch";
 import Roulette from "./Roulette/Roulette";
+import "./SpinnerCard.scss";
 function SpinnerCard({
   restaurants,
   searchSetting,
   handleClick,
   spinning,
-  handleChange
+  handleChange,
+  updateSelected
 }) {
   return (
-    <div>
-      <h2 className="spinner__title">Dinner Spinner</h2>
+    <div className="card-container">
+      <h2 className="spinner-title">Dinner Spinner</h2>
       <AdvancedSearch
         handleChange={handleChange}
         searchSetting={searchSetting}
       />
-      <Spinner restaurants={restaurants} />
       <Roulette
         spinning={spinning}
         restaurants={restaurants}
         handleClick={handleClick}
+        updateSelected={updateSelected}
       />
     </div>
   );

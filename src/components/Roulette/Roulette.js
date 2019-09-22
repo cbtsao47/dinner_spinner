@@ -1,7 +1,12 @@
 import React from "react";
 import "./Roulette.scss";
-
-export default function Roulette({ spinning, handleClick, restaurants }) {
+import MDSpinner from "react-md-spinner";
+export default function Roulette({
+  updateSelected,
+  spinning,
+  handleClick,
+  restaurants
+}) {
   const data = restaurants.map(restaurant => restaurant.name);
 
   // We have a total time. We slowly subtract from this, and once we hit zero we stop our roulette.
@@ -57,9 +62,10 @@ export default function Roulette({ spinning, handleClick, restaurants }) {
     const winner = document.getElementById("big-n-bold");
     winner.style.border = "2px solid yellow";
     handleClick(false);
+    updateSelected(winner);
   };
 
-  return (
+  return data.length ? (
     <>
       <div
         className="grandparent"
@@ -85,5 +91,7 @@ export default function Roulette({ spinning, handleClick, restaurants }) {
       </div>
       <button onClick={() => !spinning && spinStart()}>SPIN</button>
     </>
+  ) : (
+    <MDSpinner size={160} />
   );
 }

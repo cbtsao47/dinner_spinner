@@ -1,6 +1,7 @@
 import React from "react";
 
 const RestaurantInfo = ({ selected }) => {
+  console.log(selected);
   return (
     <div>
       <img src={selected.image_url} alt={selected.name} />
