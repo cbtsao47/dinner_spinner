@@ -31,28 +31,29 @@ export default class LandingPage extends Component {
   async componentDidMount() {
     /*GET USER LOCATION*/
     // getting location details
-    let latitude;
-    let longitude;
     await this.getPosition()
       .then(position => {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
+        localStorage.setItem("latitude", position.coords.latitude);
+        localStorage.setItem("longitude", position.coords.longitude);
       })
       .catch(err => {
         console.log(err.message);
       });
-
     const { radius, limit } = this.state.searchSetting;
     const DINNER_SPINNER_BE_BASE_URL =
       "https://dinner-spinner.herokuapp.com/api/restaurants/";
 
-    let DINNER_SPINNER_BE_URL = `${DINNER_SPINNER_BE_BASE_URL}${latitude}/${longitude}/${radius}/${limit}`;
+    let longitude = localStorage.getItem("longitude");
+    let latitude = localStorage.getItem("latitude");
 
+    let DINNER_SPINNER_BE_URL = `${DINNER_SPINNER_BE_BASE_URL}${latitude}/${longitude}/${radius}/${limit}`;
+    console.log(DINNER_SPINNER_BE_URL);
     fetch(DINNER_SPINNER_BE_URL)
       .then(res => {
         return res.json();
       })
       .then(data => {
+        console.log(data);
         this.setState({ ...this.state, restaurants: data.businesses });
       })
       .catch(err => {
@@ -70,21 +71,19 @@ export default class LandingPage extends Component {
   };
   handleClick = e => {
     e.preventDefault();
-    console.log("hi");
-    this.setState({ spinning: true });
+    const longitude = localStorage.getItem("longitude");
+    const latitude = localStorage.getItem("latitude");
   };
   render() {
     const { restaurants, selected, spinning } = this.state;
     return (
       <div>
-        {/* TODO: find spinner library */}
         <SpinnerCard
           restaurant={restaurants}
           updateSearchSetting={this.updateSearchSetting}
           handleClick={this.handleClick}
           spinning={spinning}
         />
-        {/* TODO: */}
         <RestaurantInfo selected={selected} />
       </div>
     );
