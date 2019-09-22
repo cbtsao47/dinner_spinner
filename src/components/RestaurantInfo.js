@@ -32,10 +32,9 @@ const RestaurantInfo = ({ selected }) => {
           <div className="restaurant-distance">
             <p>{Math.ceil(selected.distance / 1610)} mile(s) away</p>
           </div>
-
-          <div className="restaurant-reserve">
-            <p>Reserve</p>
-          </div>
+        </div>
+        <div className="restaurant-reserve">
+          <p>Reserve</p>
         </div>
         {/* 
       <p>{selected.rating}</p>
