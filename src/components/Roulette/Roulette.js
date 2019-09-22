@@ -77,7 +77,7 @@ export default function Roulette({
             // The middle container should look slightly larger than the others
             if (i === 1) {
               return (
-                <div className="child" key={i}>
+                <div className="child big-n-bold" key={i}>
                   <p id="big-n-bold">{thing}</p>
                 </div>
               );

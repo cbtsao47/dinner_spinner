@@ -2,20 +2,7 @@
 $item-count: 6;
 $item: 1 / $item-count;
 
-.grandparent {
-  width: 500px;
-  margin: 0 auto;
-  background: red;
-}
 
-#big-n-bold {
-  font-size: 1.4em;
-  font-weight: bold;
-}
-#parent {
-  .child {
-    p {
-      text-align: center;
-    }
-  }
-}
+
+
+

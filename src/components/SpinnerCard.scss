@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  margin: 0 auto; 
+  margin: 0 auto;
   border: 3px solid black;
   height: 80vh;
   width: 100%;
@@ -10,7 +10,7 @@
 
   .spinner-title {
     font-size: 2rem;
-    text-transform: uppercase
+    text-transform: uppercase;
   }
 
   form {
@@ -36,5 +36,45 @@
       }
     }
   }
-}
 
+  .grandparent {
+    height: 60%;
+    padding: 5% 0;
+    width: 500px;
+    margin: 0 auto;
+    background-image: linear-gradient(red, yellow);
+    // background-image: linear-gradient(
+    //   rgba(131, 221, 109, 0),
+    //   rgba(131, 221, 109, 1),
+    //   rgba(131, 221, 109, 1) rgba(131, 221, 109, 0)
+    // );
+
+    #parent {
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+      justify-content: space-between;
+      .child {
+        margin: 0 15px;
+        font-size: 2rem;
+        display: flex;
+        flex-flow: column;
+        height: 30%;
+        border: 3px solid black;
+        p {
+          margin: auto;
+          text-align: center;
+        }
+      }
+      .big-n-bold {
+        margin: 0;
+        height: 35%;
+        font-weight: bold;
+
+        p {
+          font-size: 1.8em;
+        }
+      }
+    }
+  }
+}
