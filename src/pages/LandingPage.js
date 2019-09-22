@@ -86,6 +86,12 @@ export default class LandingPage extends Component {
           .catch(err => console.log(err))
       : this.setState({ spinning: bool });
   };
+  updateSelected = selected => {
+    const result = this.state.restaurants.filter(
+      restaurant => restaurant.name === selected.textContent
+    )[0];
+    this.setState({ selected: result });
+  };
   render() {
     const { restaurants, selected, spinning, searchSetting } = this.state;
     return (
@@ -96,6 +102,7 @@ export default class LandingPage extends Component {
           spinning={spinning}
           handleChange={this.handleChange}
           searchSetting={searchSetting}
+          updateSelected={this.updateSelected}
         />
         <RestaurantInfo selected={selected} />
       </main>

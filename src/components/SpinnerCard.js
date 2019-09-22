@@ -7,7 +7,8 @@ function SpinnerCard({
   searchSetting,
   handleClick,
   spinning,
-  handleChange
+  handleChange,
+  updateSelected
 }) {
   return (
     <div className="card-container">
@@ -20,6 +21,7 @@ function SpinnerCard({
         spinning={spinning}
         restaurants={restaurants}
         handleClick={handleClick}
+        updateSelected={updateSelected}
       />
     </div>
   );
