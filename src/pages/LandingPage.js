@@ -53,7 +53,12 @@ export default class LandingPage extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({ ...this.state, restaurants: data.businesses });
+        console.log(JSON.stringify(data.businesses[0]));
+        this.setState({
+          ...this.state,
+          restaurants: data.businesses,
+          selected: data.businesses[0]
+        });
       })
       .catch(err => {
         console.log(err);
