@@ -53,7 +53,6 @@ export default class LandingPage extends Component {
         return res.json();
       })
       .then(data => {
-        console.log(data);
         this.setState({ ...this.state, restaurants: data.businesses });
       })
       .catch(err => {
@@ -70,7 +69,6 @@ export default class LandingPage extends Component {
     });
   };
   handleClick = bool => {
-    console.log(bool);
     const { radius, limit } = this.state.searchSetting;
     const DINNER_SPINNER_BE_BASE_URL =
       "https://dinner-spinner.herokuapp.com/api/restaurants/";
@@ -91,7 +89,7 @@ export default class LandingPage extends Component {
   render() {
     const { restaurants, selected, spinning, searchSetting } = this.state;
     return (
-      <div>
+      <main className="landing-page-container">
         <SpinnerCard
           restaurants={restaurants}
           handleClick={this.handleClick}
@@ -100,7 +98,7 @@ export default class LandingPage extends Component {
           searchSetting={searchSetting}
         />
         <RestaurantInfo selected={selected} />
-      </div>
+      </main>
     );
   }
 }
