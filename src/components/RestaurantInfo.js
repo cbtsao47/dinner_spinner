@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/RestaurantInfo.css";
+import "../styles/RestaurantInfo.scss";
 
 const RestaurantInfo = ({ selected }) => {
   console.log(selected);
@@ -17,9 +17,12 @@ const RestaurantInfo = ({ selected }) => {
           <div className="restaurant-title">
             <h2>{selected.name}</h2>
             <div>
-              {selected.is_closed && <p>closed now</p>}
-              {!selected.is_closed && <p>open now</p>}
+              {selected.is_closed && <p className="closed">closed now</p>}
+              {!selected.is_closed && <p className="open">open now</p>}
             </div>
+          </div>
+          <div className="restaurant-distance">
+            <p>{Math.ceil(selected.distance / 1610)} mile(s) away</p>
           </div>
           <div className="restaurant-address">
             <p>{selected.location && selected.location.display_address}</p>
@@ -27,10 +30,6 @@ const RestaurantInfo = ({ selected }) => {
 
           <div className="restaurant-phone">
             <p>{selected.phone}</p>
-          </div>
-
-          <div className="restaurant-distance">
-            <p>{Math.ceil(selected.distance / 1610)} mile(s) away</p>
           </div>
         </div>
         <div className="restaurant-reserve">
