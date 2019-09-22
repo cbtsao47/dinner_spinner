@@ -1,4 +1,40 @@
 .card-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  margin: 0 auto; 
   border: 3px solid black;
-  max-width: 30%;
+  height: 80vh;
+  width: 100%;
+  max-width: 500px;
+
+  .spinner-title {
+    font-size: 2rem;
+    text-transform: uppercase
+  }
+
+  form {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 5%;
+
+    label {
+      width: 40%;
+      text-align: left;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    input {
+      margin-top: 10px;
+      border: none;
+      border-bottom: 2px solid lightgray;
+      font-size: 1.5rem;
+
+      &:focus {
+        border-bottom: 2px solid black;
+      }
+    }
+  }
 }
+
