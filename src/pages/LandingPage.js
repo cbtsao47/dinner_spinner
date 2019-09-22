@@ -1,21 +1,22 @@
 import React, { Component } from "react";
-import Spinner from "../components/Spinner";
+import SpinnerCard from "../components/SpinnerCard";
 import RestaurantInfo from "../components/RestaurantInfo";
-import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
 export default class LandingPage extends Component {
   state = {
     restaurants: [],
     searchSetting: { radius: 5, limit: 8 },
-    selected: {}
+    selected: {},
+    spinning: false
   };
-  /**
-   * Update search setting
-   * @param searchSetting, object containing radius and limit
-   * @returns does not return anything
-   */
-  updateSearchSetting = searchSetting => {
-    this.setState({ searchSetting });
+  handleChange = e => {
+    this.setState({
+      searchSetting: {
+        ...this.state.searchSetting,
+        [e.target.name]: Number(e.target.value)
+      }
+    });
   };
+
   /**
    * Filter through a list of restaurants based of search setting
    * @param restaurants, array of objects
@@ -31,28 +32,28 @@ export default class LandingPage extends Component {
   async componentDidMount() {
     /*GET USER LOCATION*/
     // getting location details
-    let latitude;
-    let longitude;
     await this.getPosition()
       .then(position => {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
+        localStorage.setItem("latitude", position.coords.latitude);
+        localStorage.setItem("longitude", position.coords.longitude);
       })
       .catch(err => {
         console.log(err.message);
       });
-
     const { radius, limit } = this.state.searchSetting;
     const DINNER_SPINNER_BE_BASE_URL =
       "https://dinner-spinner.herokuapp.com/api/restaurants/";
 
-    let DINNER_SPINNER_BE_URL = `${DINNER_SPINNER_BE_BASE_URL}${latitude}/${longitude}/${radius}/${limit}`;
+    let longitude = localStorage.getItem("longitude");
+    let latitude = localStorage.getItem("latitude");
 
+    let DINNER_SPINNER_BE_URL = `${DINNER_SPINNER_BE_BASE_URL}${latitude}/${longitude}/${radius}/${limit}`;
     fetch(DINNER_SPINNER_BE_URL)
       .then(res => {
         return res.json();
       })
       .then(data => {
+        console.log(data);
         this.setState({ ...this.state, restaurants: data.businesses });
       })
       .catch(err => {
@@ -68,17 +69,36 @@ export default class LandingPage extends Component {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
   };
+  handleClick = bool => {
+    console.log(bool);
+    const { radius, limit } = this.state.searchSetting;
+    const DINNER_SPINNER_BE_BASE_URL =
+      "https://dinner-spinner.herokuapp.com/api/restaurants/";
 
+    let longitude = localStorage.getItem("longitude");
+    let latitude = localStorage.getItem("latitude");
+    bool
+      ? fetch(
+          `${DINNER_SPINNER_BE_BASE_URL}${latitude}/${longitude}/${radius}/${limit}`
+        )
+          .then(res => res.json())
+          .then(data => {
+            this.setState({ spinning: bool, restaurants: data.businesses });
+          })
+          .catch(err => console.log(err))
+      : this.setState({ spinning: bool });
+  };
   render() {
-    const { restaurants, selected } = this.state;
+    const { restaurants, selected, spinning, searchSetting } = this.state;
     return (
       <div>
-        {/* TODO: find spinner library */}
-        <Spinner
+        <SpinnerCard
           restaurants={restaurants}
-          updateSearchSetting={this.updateSearchSetting}
+          handleClick={this.handleClick}
+          spinning={spinning}
+          handleChange={this.handleChange}
+          searchSetting={searchSetting}
         />
-        {/* TODO: */}
         <RestaurantInfo selected={selected} />
       </div>
     );

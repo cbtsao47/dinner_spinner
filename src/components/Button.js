@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
-export class Button extends Component {
-  render() {
-    return (
-      <div>
-        <button>SPIN</button>
-      </div>
-    );
-  }
+function Button({ spin, handleClick }) {
+  return (
+    <div>
+      <button onClick={e => handleClick(e)}>{spin ? "SPIN" : null}</button>
+    </div>
+  );
 }
 
 export default Button;
