@@ -92,9 +92,13 @@ export default function Roulette({
           })}
         </div>
       </div>
-      <button onClick={() => !spinning && spinStart()}>SPIN</button>
+      <button className="spin-button" onClick={() => !spinning && spinStart()}>
+        SPIN
+      </button>
     </>
   ) : (
-    <MDSpinner size={160} />
+    <div className="loader">
+      <MDSpinner size={160} />
+    </div>
   );
 }

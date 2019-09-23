@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SpinnerCard from "../components/SpinnerCard";
 import RestaurantInfo from "../components/RestaurantInfo";
+import "./LandingPage.scss";
 export default class LandingPage extends Component {
   state = {
     restaurants: [],

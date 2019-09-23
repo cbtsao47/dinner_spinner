@@ -2,7 +2,20 @@
 $item-count: 6;
 $item: 1 / $item-count;
 
-
-
-
-
+.spin-button {
+  background: #83dd6d;
+  height: 5rem;
+  border: none;
+  width: 100%;
+  color: white;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+  cursor: pointer;
+}
+.loader {
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

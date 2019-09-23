@@ -2,37 +2,42 @@
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  margin: 0 auto;
   border: 3px solid black;
-  height: 80vh;
+  border-radius: 15px;
+  overflow: hidden;
+  height: 50rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 35rem;
+  margin-right: 4rem;
 
   .spinner-title {
     font-size: 2rem;
     text-transform: uppercase;
+    padding-top: 2rem;
+    font-size: 3rem;
   }
 
   form {
     display: flex;
     justify-content: space-evenly;
-    padding: 0 5%;
+    padding: 0 1rem;
 
     label {
       width: 40%;
       text-align: left;
       font-size: 1.5rem;
       font-weight: bold;
-    }
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      input {
+        margin-top: 10px;
+        border: none;
+        border-bottom: 2px solid lightgray;
 
-    input {
-      margin-top: 10px;
-      border: none;
-      border-bottom: 2px solid lightgray;
-      font-size: 1.5rem;
-
-      &:focus {
-        border-bottom: 2px solid black;
+        &:focus {
+          border-bottom: 2px solid black;
+        }
       }
     }
   }
@@ -40,14 +45,8 @@
   .grandparent {
     height: 60%;
     padding: 5% 0;
-    width: 500px;
+    width: 100%;
     margin: 0 auto;
-    background-image: linear-gradient(red, yellow);
-    // background-image: linear-gradient(
-    //   rgba(131, 221, 109, 0),
-    //   rgba(131, 221, 109, 1),
-    //   rgba(131, 221, 109, 1) rgba(131, 221, 109, 0)
-    // );
 
     #parent {
       height: 100%;
@@ -61,6 +60,7 @@
         flex-flow: column;
         height: 30%;
         border: 3px solid black;
+        border-radius: 15px;
         p {
           margin: auto;
           text-align: center;
@@ -69,6 +69,8 @@
       .big-n-bold {
         margin: 0;
         height: 35%;
+        margin-left: 1rem;
+        margin-right: 1rem;
         font-weight: bold;
 
         p {
